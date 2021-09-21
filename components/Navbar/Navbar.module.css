@@ -23,6 +23,19 @@
     cursor: pointer;
 }
 
+.users_icon{
+    height: 1.6rem;
+    width: 1.6rem;
+    background-color: 2px solid red;
+    position: absolute;
+    left: 10rem;
+    top: 1.8rem;
+    transform: scale(2)
+}
+
+.users_icon:hover{
+    cursor: pointer;
+}
 .nav_right{
     display: flex;
     width: 40%;

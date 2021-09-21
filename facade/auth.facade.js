@@ -1,10 +1,10 @@
 //connect to database
-import connectToDB from "../utils/db/db_connect";
+import connectToDB from '../utils/db/db_connect';
 import jwt from 'jsonwebtoken';
 import registerSchema from '../utils/db/schema/resister_user_schema';
 
-authenticateUser = async (email, password) => {
-    const user = await userSchema.findOne({ email });
+const authenticateUser = async (email, password) => {
+    const user = await registerSchema.findOne({ email });
     if (user == undefined) {
         const resObj = {
             "dataObj": null,

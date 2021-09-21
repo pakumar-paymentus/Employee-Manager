@@ -1,12 +1,12 @@
 //connect to database
-import connectToDB from "../utils/db/db_connect"; // register user schema
-import registerSchema from '../utils/db/schema/resister_user_schema';
+import connectToDB from '../utils/db/db_connect';
+import userSchema from '../utils/db/schema/resister_user_schema';
 
 const registerMyUser = async (user) => {
     try {
-        const userData = await new registerSchema(user);
+        const userData = await new userSchema(user);
         await userData.save();
-        resObj = saveData = {
+        const resObj = saveData = {
             "dataObject": userData,
             "errorObj": null,
             "messageObj": "You are now registered"
@@ -14,7 +14,7 @@ const registerMyUser = async (user) => {
         return resObj;
 
     } catch (err) {
-        resObj = {
+        const resObj = {
             "dataObject": null,
             "errorObj": err,
             "messageObj": "email or phone already registered, if not try again later"
