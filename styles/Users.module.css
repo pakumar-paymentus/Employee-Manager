@@ -1,0 +1,28 @@
+.main_container{
+    height: 100vh;
+    background-color: #005e6a;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+   
+
+}
+
+.user_container{
+    margin: 2rem;
+    padding-top: 1.5rem;
+    height: 10%;
+    width: 10%;
+    border: 2px solid #00effa;
+    background-color: #032428;
+    color: rgba(255, 255, 255, 0.808);
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.user_container:hover{
+    cursor: pointer;
+    color:white;
+    
+}

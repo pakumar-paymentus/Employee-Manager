@@ -1,7 +1,18 @@
 import Head from 'next/head';
 import styles from  './Navbar.module.css';
 import Link from 'next/link';
+import  {useRouter} from 'next/router';
+
 const Navbar = () => {
+    const router = useRouter();
+    const getUsers = () => {
+        router.push('/users');
+    }
+    
+    const addUser = () => {
+        router.push('/register');
+    }
+
     return(
         <>
          <Head>
@@ -12,8 +23,14 @@ const Navbar = () => {
             <div className={styles.nav_left}>
                 <div className={styles.paxcom}>Paxcom</div>
                 <div className={styles.users_icon}>
-                    <i class="fas fa-users"></i>
+                    <i className="fas fa-users" onClick={getUsers}></i>
+                    
                 </div>
+                <div className={styles.addUser_icon}>
+                    <i className="fas fa-user-plus" onClick={addUser}></i>
+                    
+                </div>
+                
             </div>
             <div className={styles.nav_right}>
                 <div className={`${styles.home} ${styles.nav_right_body}`}>Home</div>

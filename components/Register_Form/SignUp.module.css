@@ -37,6 +37,7 @@
     padding: 0.8rem;
     
 }
+
 .cred{
     display: flex;
     flex-wrap: wrap;
@@ -64,4 +65,12 @@
 }
 .submitBtn:hover{
     background-color: rgb(16, 16, 90);
+}
+
+
+.msg{
+    position: relative;
+    top: .5rem;
+    left: 2.2rem;
+    color: rgb(131, 0, 0);
 }

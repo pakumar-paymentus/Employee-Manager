@@ -2,33 +2,36 @@
 import connectToDB from '../utils/db/db_connect';
 import jwt from 'jsonwebtoken';
 import registerSchema from '../utils/db/schema/resister_user_schema';
+connectToDB();
 
 const authenticateUser = async (email, password) => {
     const user = await registerSchema.findOne({ email });
-    if (user == undefined) {
-        const resObj = {
-            "dataObj": null,
-            "messageObj": "you are not registered",
+    if (!user) {
+        const res = {
+            "data": null,
+            "message": "you are not registered",
         }
-        return resObj;
+        return res;
     } else if (user.password === password) {
         //generate JWT token and assign to user
         const helper = { "name": user.firstName, "email": email }
         const token = await jwt.sign(helper, process.env.JWT_KEY);
-
-        const resObj = {
-            "dataObj": {
+        const res = {
+            "data": {
+                "auth": true, 
                 "token": token,
             },
-            "messageObj": "Welcome to HomePage"
+            "message": "Welcome to HomePage"
         }
-        return resObj;
+        return res;
     } else {
-        const resObj = {
-            "dataObj": null,
-            "messageObj": "email id or password is incorrect"
+        const res = {
+            "data":{
+                "auth" : "false"
+            },
+            "message": "Email id or Password is incorrect"
         }
-        return resObj;
+        return res;
     }
 }
 

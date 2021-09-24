@@ -1,25 +1,26 @@
 //connect to database
 import connectToDB from '../utils/db/db_connect';
 import userSchema from '../utils/db/schema/resister_user_schema';
+connectToDB();
 
 const registerMyUser = async (user) => {
     try {
         const userData = await new userSchema(user);
         await userData.save();
-        const resObj = saveData = {
-            "dataObject": userData,
-            "errorObj": null,
-            "messageObj": "You are now registered"
+        const res = {
+            "data": userData,
+            "error": null,
+            "message": "You are now registered"
         };
-        return resObj;
+        return res;
 
     } catch (err) {
-        const resObj = {
-            "dataObject": null,
-            "errorObj": err,
-            "messageObj": "email or phone already registered, if not try again later"
+        const res = {
+            "data": null,
+            "error": err,
+            "message": "email is already registered"
         }
-        return resObj
+        return res
     }
 }
 

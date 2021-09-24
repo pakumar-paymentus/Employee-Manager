@@ -1,17 +1,26 @@
 import styles from './SignIn.module.css';
 import Link from 'next/link';
 import {useState} from 'react';
-import home from '../../pages/home.js';
+import { useRouter } from 'next/router';
 
 
 const SignIn = () => {
+    const router = useRouter();
     const a_style = {
         color: 'rgb(11, 11, 97)',
         textDecoration: 'underline'
     }
-
+ 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    //status is used to show serer side msg of authentication to user in div element 
+    //which is only show when status is true 
+    const [status, setStatus] = useState(false);
+
+    //msg used to show msg of authentication
+    const [msg, setMsg]= useState();
+    
 
     //on click of SignIn button post data for authentication to api
     const login = async(e) => {
@@ -19,7 +28,6 @@ const SignIn = () => {
             email: email,
             password: password
         }
-        console.log(userData);
         const response = await fetch('/api/auth.services', {
             method: 'POST',
             body: JSON.stringify(userData),
@@ -27,9 +35,20 @@ const SignIn = () => {
                 'Content-Type': 'application/json'
             }
         })
-        // const data = await response.josn();
-        // console.log(data);
+
+        const res = await response.json();
+        console.log(res);
+        if(res.data == null){
+            setStatus(true);
+            setMsg(res.message);
+        }else if(res.data.auth === true){
+            router.push('/home');
+        }else{
+            setStatus(true);
+            setMsg(res.message);
+        }
     }
+  
     return(
         <>
         <div className={styles.signIn}>
@@ -38,11 +57,12 @@ const SignIn = () => {
             </div>
             <div className={styles.formFld}>
                 <input className={styles.input} type='text' placeholder='Email' value={email} required 
-                    onChange={(e) => setEmail(e.target.value)}>
-                </input>
+                    onChange={(e) => setEmail(e.target.value)}
+                />
                 <input className={styles.input} type='text' placeholder='Password' value={password} required 
-                    onChange={(e) => setPassword(e.target.value)}>
-                </input>
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+           
 
                 <div className={styles.forgetFld}>
                     <Link href='/register'>
@@ -56,6 +76,9 @@ const SignIn = () => {
                 <div className={styles.create}>
                     Don't have account<Link href='/register'><a style={a_style}> SIGN UP </a></Link>
                 </div>
+               {
+                   status?<div className={styles.msg}>{msg}</div>:null
+               }
             </div>
         </div>
         </>

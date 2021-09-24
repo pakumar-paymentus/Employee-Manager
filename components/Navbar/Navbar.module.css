@@ -10,7 +10,10 @@
 }
 
 .nav_left{
+    width: 20%;
     margin-left: 2%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .paxcom{
@@ -24,16 +27,19 @@
 }
 
 .users_icon{
-    height: 1.6rem;
-    width: 1.6rem;
-    background-color: 2px solid red;
-    position: absolute;
-    left: 10rem;
-    top: 1.8rem;
-    transform: scale(2)
+    margin-top: .5rem;
+    transform: scale(2);
 }
 
 .users_icon:hover{
+    cursor: pointer;
+}
+.addUser_icon{
+    margin-top: .5rem;
+    transform: scale(1.8);  
+}
+
+.addUser_icon:hover{
     cursor: pointer;
 }
 .nav_right{

@@ -23,10 +23,6 @@ const registerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    conformPassword:{
-        type: String,
-        required: true
-    },
     age: Number,
     gender: String,
     mobile: Number,
@@ -35,4 +31,5 @@ const registerSchema = new mongoose.Schema({
 
 // if alreay require this will show error you do not override model
 //for avoid that error if model is already connected return that model
-export default mongoose.models.employees || mongoose.model('employees', registerSchema);
+    
+export default mongoose.models.Employee || mongoose.model("Employee", registerSchema); 

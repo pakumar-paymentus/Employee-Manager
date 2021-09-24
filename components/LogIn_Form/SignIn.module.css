@@ -1,7 +1,7 @@
 .signIn{
     position: absolute;
     top: 30%;
-    height: 45vh;
+    height: 47vh;
     width: 20vw;
     background-color:rgba(35, 67, 52, 0.3);
 
@@ -48,4 +48,9 @@
     margin-top: -0.8rem;
     margin-left: 1.2rem;
     font-size: 0.9rem;
+}
+.msg{
+    position: relative;
+    left: 1.5rem;
+    color: rgb(131, 0, 0);
 }
