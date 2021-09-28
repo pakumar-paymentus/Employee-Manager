@@ -1,26 +1,19 @@
 import styles from './User.module.css';
 import { useState } from 'react';
-
+import displayUsers from '../../pages/users';
 const User = () => {
-    const [status, setStatus] = useState('flex');
-    const displayHandler = () => {
-        status === 'flex' ? setStatus('none') : setStatus('flex');
-    }
-    const displayProp = {
-        display: status
-    }
+    
     return(
         <>
             <head>
                 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
             </head>
             <div className={styles.body}>           
-               <div className={styles.main_container} style={displayProp}>
+               <div className={styles.main_container}>
                    <div className={styles.upperBody}>
                         <div className={styles.cancelBtn}>
-                            <i className="fas fa-times-circle"
-                            onClick={displayHandler}></i>
-
+                            <i className="fas fa-times-circle" 
+                            onClick={displayUsers.cancelBtnHandler}></i>
                         </div>
                         <div className={styles.profilePic}>
                             <i className={`fas fa-user ${styles.pic}`}></i>

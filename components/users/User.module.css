@@ -5,32 +5,33 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    border: 2px solid blueviolet;
+    background-color: #005e6a;
+    border: 1px solid;
+
 }
 .main_container{
     position: relative; 
     height: 60%;
-    width: 50%;
-    border: 2px solid red;    
+    width: 70%;
+    border: 1px solid;    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0f6670;
+    background-color: #005e6a;
 }
 
 .upperBody{
     position: relative;
     height: 50%;
     width: 100%;
-    border: 2px solid green;
     
 }
 .lowerBody{
     position: relative;
     height: 50%;
     width: 100%;
-    border: 2px solid blue;
+    margin-left: 2rem;
 }
 
 .cancelBtn{
@@ -49,7 +50,7 @@
     position: relative;
     width: 5%;
     transform: scale(5);
-    left: 45%;
+    left: 48%;
     top: 12%;
 }
 
