@@ -2,22 +2,35 @@ import styles from '../../styles/Users.module.css';
 import {useState} from 'react';
 import User from '../../components/users/User';
 import styles_user from '../../components/users/User.module.css';
+import { useTable } from "react-table";
+import COLUMNS from "../../components/users/columns";
+import { useMemo } from "react";
+
 
 
 const displayUsers = ({users}) => {
 
     const [status, setStatus] = useState(false);
-    let userData ;
-
     const cancelBtnHandler =  () => {
         setStatus(false);
     }
     const showProfile = (data) => {
        if(status === false) setStatus(true)
-       userData = data;
-       console.log(userData);
     }
-    
+
+    const columns = useMemo(() => COLUMNS, []);
+    const data = useMemo(() => users, []);
+    const tableInstance = useTable({
+        columns: columns,
+        data: data
+    });
+
+    const { getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow
+        } = tableInstance;
 
     return (
         <>
@@ -26,19 +39,31 @@ const displayUsers = ({users}) => {
         </head>
         <div className={styles.body} >
          <div className={styles.main_container}  >
-           {
-               //for each loop over users to render every user
-               users.map((user) => {
-                   return(
-                    
-                        <div key={user.id} className={styles.user_container}
-                        onClick={(event => showProfile(user)) }>
-                            {`${user.firstName} ${user.lastName}`}
-                        </div>
+         <table {...getTableProps()}>
+            <thead>
+                {headerGroups.map((headerGroup) => {
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map((column) => (
+                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                        ))}
+                    </tr>
+                })}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+                {rows.map((row)=> {
+                    prepareRow(row)
+                    return(
+                        <tr {...getRowProps()}>
+                        {row.cells.map((cell) => {
+                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        })}
+
+                        </tr>
                     )
-               })     
-           } 
-           </div>
+                })}
+            </tbody>
+        </table>
+         </div>
            {
 
             status ? 
