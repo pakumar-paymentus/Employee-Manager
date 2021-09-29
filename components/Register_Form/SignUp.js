@@ -42,7 +42,8 @@ const SignUp = () => {
         }
         
         const myValidator = checker(userData, conformPassword);
-    
+        
+        //client side validation checks
         //If status true means show error msg to client
         if(myValidator.setStatus){
             setStatus(true);
@@ -51,7 +52,7 @@ const SignUp = () => {
         }
        
 
-
+        //post the user data for registration:
         const response = await fetch('/api/user.services', {
             method:'POST',
             body: JSON.stringify(userData),
@@ -59,12 +60,14 @@ const SignUp = () => {
                 'Content-Type': "application/json"
             }
         });
+
+
         const res = await response.json();
-        console.log(res);
-        if(res.data !== null){
+        //if res.data is found, successfully registered 
+        if(res.data){
             router.push('/');
         }
-        else{
+        else{                  // else email is already registered
             setStatus(true);
             setMsg(res.message);
         }

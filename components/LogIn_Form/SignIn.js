@@ -2,6 +2,7 @@ import styles from './SignIn.module.css';
 import Link from 'next/link';
 import {useState} from 'react';
 import { useRouter } from 'next/router';
+import checker from './validationChecks';
 
 
 const SignIn = () => {
@@ -28,6 +29,22 @@ const SignIn = () => {
             email: email,
             password: password
         }
+        const myValidator = checker(userData);
+        if(myValidator.setStatus){
+            setStatus(true);
+            setMsg(myValidator.setMsg);
+            return;
+        }
+        
+        //client side validation checks
+        //If status true means show error msg to client
+        if(myValidator.setStatus){
+            setStatus(true);
+            setMsg(myValidator.setMsg);
+            return;
+        }
+
+        //post the user credentials for authentication
         const response = await fetch('/api/auth.services', {
             method: 'POST',
             body: JSON.stringify(userData),
@@ -36,15 +53,17 @@ const SignIn = () => {
             }
         })
 
+    
         const res = await response.json();
-        console.log(res);
-        if(res.data == null){
+
+        //if res.data is null or undefined then it is not registerd
+        if(!res.data){
             setStatus(true);
             setMsg(res.message);
-        }else if(res.data.auth === true){
+        }else if(res.data.auth === true){   // if res.data.auth is true that means user authenticated
             router.push('/home');
-        }else{
-            setStatus(true);
+        }else{                          // if res.data.auth is false that means email or password is incorrect
+            setStatus(true);    
             setMsg(res.message);
         }
     }
@@ -59,7 +78,7 @@ const SignIn = () => {
                 <input className={styles.input} type='text' placeholder='Email' value={email} required 
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input className={styles.input} type='text' placeholder='Password' value={password} required 
+                <input className={styles.input} type='password' placeholder='Password' value={password} required 
                     onChange={(e) => setPassword(e.target.value)}
                 />
            

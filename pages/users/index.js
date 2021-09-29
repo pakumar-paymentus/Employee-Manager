@@ -3,16 +3,19 @@ import {useState} from 'react';
 import User from '../../components/users/User';
 import styles_user from '../../components/users/User.module.css';
 
+
 const displayUsers = ({users}) => {
+
     const [status, setStatus] = useState(false);
     let userData ;
 
     const cancelBtnHandler =  () => {
         setStatus(false);
     }
-    const showProfile = (event) => {
+    const showProfile = (data) => {
        if(status === false) setStatus(true)
-       console.log(event);
+       userData = data;
+       console.log(userData);
     }
     
 
@@ -29,7 +32,7 @@ const displayUsers = ({users}) => {
                    return(
                     
                         <div key={user.id} className={styles.user_container}
-                        onClick={(event => showProfile(event)) }>
+                        onClick={(event => showProfile(user)) }>
                             {`${user.firstName} ${user.lastName}`}
                         </div>
                     )
@@ -38,8 +41,8 @@ const displayUsers = ({users}) => {
            </div>
            {
 
-               status ? 
-               <div className={styles_user.body}>           
+            status ? 
+            <div className={styles_user.body}>           
                <div className={styles_user.main_container}>
                    <div className={styles_user.upperBody}>
                         <div className={styles_user.cancelBtn}>
@@ -49,8 +52,10 @@ const displayUsers = ({users}) => {
                         <div className={styles_user.profilePic}>
                             <i className={`fas fa-user ${styles_user.pic}`}></i>
                         </div>
-                        <div className={styles_user.name}>Pawan Kumar</div>
-                   </div>
+                        {/* {!userData?userData.email:null} */}
+                        <div className={styles_user.name}> Pawan Kumar
+                        </div>
+                    </div>
                    <div className={styles_user.lowerBody}>
                     <div className={styles_user.otherDetails}>
                         <div className={styles_user.details}>Email :</div>
@@ -59,7 +64,7 @@ const displayUsers = ({users}) => {
                         <div className={styles_user.details}>Age : </div>
                         <div className={styles_user.details}>Gender : </div>
                     </div>
-                   </div>
+                </div>
                     
                </div>
             </div>

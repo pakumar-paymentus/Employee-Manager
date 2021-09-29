@@ -33,10 +33,11 @@ const Navbar = () => {
                 
             </div>
             <div className={styles.nav_right}>
-                <div className={`${styles.home} ${styles.nav_right_body}`}>Home</div>
-                <div className={`${styles.nav_right_body}`}>About Us</div>
+                <div className={`${styles.home} ${styles.nav_right_body}`}>
+                    <Link href='home'> Home </Link>
+                </div>
                 <div className={`${styles.nav_right_body}`}>
-                    <Link href='/'><a>Sign In</a></Link>
+                    <Link href='https://paxcom.ai/#about'> About Us </Link>
                 </div>
                 <div className={`${styles.nav_right_body}`}>
                     <Link href='/register'>
