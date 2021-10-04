@@ -9,6 +9,8 @@
     position: fixed;
     
 
+    
+
 
 }
 .paxcom{
@@ -20,13 +22,11 @@
 .nav .right_nav{
     display: flex;
     list-style: none;
-   
-
     
 }
 
 .li{
-    margin: 0 5px;
+    margin: 0 8px;
     padding: 8px 10px;
     font-weight: bold;
     border-radius: 5px;
@@ -40,3 +40,14 @@
     color: #1b1b1b;
 }
 
+.userIcon{
+    transform: scale(2);
+    color: white;
+    display: flex;
+    margin: 0 12px 0 24px;
+    align-items: center;
+}
+
+.userIcon:hover{
+    cursor: pointer;
+}

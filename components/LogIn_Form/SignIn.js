@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {useState} from 'react';
 import { useRouter } from 'next/router';
 import checker from './validationChecks';
+import Navbar from '../Navbar/Navbar';
 
 
 const SignIn = () => {
@@ -70,6 +71,7 @@ const SignIn = () => {
   
     return(
         <>
+        <Navbar />
         <div className={styles.signIn}>
             <div className={styles.header}>
                 SIGN IN

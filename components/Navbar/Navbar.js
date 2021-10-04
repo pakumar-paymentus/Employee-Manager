@@ -1,52 +1,35 @@
 import Head from 'next/head';
 import styles from  './Navbar.module.css';
 import Link from 'next/link';
-import  {useRouter} from 'next/router';
 
 const Navbar = () => {
-    const router = useRouter();
-    const getUsers = () => {
-        router.push('/users');
+
+    const listStyle = {
+        'cursor': 'pointer',
+        'backgroundColor': 'white',
+        'color': '#1b1b1b'
     }
-    
-    const addUser = () => {
-        router.push('/register');
-    }
+    const addStyling = (e) => {
+        console.log(e);
+        e.target.classList.add('active');
+    } 
 
     return(
         <>
-         <Head>
-            <title>Paxcom</title>
-            <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        </Head>
-        <div className={styles.nav}>
-            <div className={styles.nav_left}>
-                <div className={styles.paxcom}>Paxcom</div>
-                <div className={styles.users_icon}>
-                    <i className="fas fa-users" onClick={getUsers}></i>
-                    
-                </div>
-                <div className={styles.addUser_icon}>
-                    <i className="fas fa-user-plus" onClick={addUser}></i>
-                    
-                </div>
-                
-            </div>
-            <div className={styles.nav_right}>
-                <div className={`${styles.home} ${styles.nav_right_body}`}>
-                    <Link href='home'> Home </Link>
-                </div>
-                <div className={`${styles.nav_right_body}`}>
-                    <Link href='https://paxcom.ai/#about'> About Us </Link>
-                </div>
-                <div className={`${styles.nav_right_body}`}>
-                    <Link href='/register'>
-                        <a>Create Account</a>
-                    </Link>
-                </div>
-            </div>
-        </div>
 
+        <div className={styles.nav}>
+                <div className={styles.paxcom}>Paxcom</div>
+                <ul className={styles.right_nav}>
+                    <li className={styles.li} onClick={(e) => addStyling(e)}>
+                        <Link href='/'><a>SIGN IN</a></Link>
+                    </li>
+                    <li className={styles.li}>
+                        <Link href='/register'><a>SIGN UP</a></Link>
+                    </li>
+                </ul>
+            </div>
+
+   
 
         </>
     )

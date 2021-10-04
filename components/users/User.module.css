@@ -1,24 +1,22 @@
 .body{
     height: 100vh;
-    width: 50vw;
+    width: 35vw;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    background-color: #005e6a;
     border: 1px solid;
 
 }
 .main_container{
     position: relative; 
     height: 60%;
-    width: 70%;
-    border: 1px solid;    
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #005e6a;
+    background-color: whitesmoke;
 }
 
 .upperBody{
@@ -63,7 +61,6 @@
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
-    color: white
 }
 
 .otherDetails{
@@ -76,7 +73,6 @@
 
 .details{
     position: relative;
-    color: white;
     position: relative;
     height: 20%;
     font-weight: bold;

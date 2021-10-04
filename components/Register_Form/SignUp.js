@@ -125,7 +125,7 @@ const SignUp = () => {
                     />
                     <button className={styles.submitBtn} 
                         onClick={(e) => signin(e)}>
-                    SIGN IN</button>
+                    SIGN UP</button>
                     {
                         status ? <div className={styles.msg}>{msg}</div> : null
                     }

@@ -5,9 +5,6 @@ const User = () => {
     
     return(
         <>
-            <head>
-                <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-            </head>
             <div className={styles.body}>           
                <div className={styles.main_container}>
                    <div className={styles.upperBody}>
