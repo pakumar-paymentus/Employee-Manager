@@ -1,15 +1,15 @@
 import styles from '../../styles/Users.module.css';
-import {useState} from 'react';
-import User from '../../components/users/User';
-import styles_user from '../../components/users/User.module.css';
+import {useState, useContext} from 'react';
+import User from '../../components/user/User';
 import AuthNavbar from '../../components/AuthNavbar/AuthNavbar';
- 
+import AppContext from '../context/state';
 
 
 const displayUsers = ({users}) => {
-
+    const {cancelBtnStatus} = useContext(AppContext);
     const [status, setStatus] = useState(false);
-    const cancelBtnHandler =  () => {
+    
+    if(cancelBtnStatus){
         setStatus(false);
     }
     const showProfile = () => {
@@ -53,32 +53,7 @@ const displayUsers = ({users}) => {
            {
 
             status ? 
-            <div className={styles_user.body}>           
-               <div className={styles_user.main_container}>
-                   <div className={styles_user.upperBody} >
-                        <div className={styles_user.cancelBtn}>
-                            <i className="fas fa-times-circle" 
-                            onClick={cancelBtnHandler}></i>
-                        </div>
-                        <div className={styles_user.profilePic}>
-                            <i className={`fas fa-user ${styles_user.pic}`}></i>
-                        </div>
-                        {/* {!userData?userData.email:null} */}
-                        <div className={styles_user.name}> Pawan Kumar
-                        </div>
-                    </div>
-                   <div className={styles_user.lowerBody}>
-                    <div className={styles_user.otherDetails}>
-                        <div className={styles_user.details}>Email :</div>
-                        <div className={styles_user.details}>Mobile :</div>
-                        <div className={styles_user.details}>DOB : </div>
-                        <div className={styles_user.details}>Age : </div>
-                        <div className={styles_user.details}>Gender : </div>
-                    </div>
-                </div>
-                    
-               </div>
-            </div>
+                <User />
                : null 
            }
         </div>
