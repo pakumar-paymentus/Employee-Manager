@@ -1,15 +1,24 @@
 import authenticateUser from "../../facade/auth.facade";
-import cookieCutter from 'cookie-cutter';
+import cookie from 'cookie';
 
+// import Cookies from 'universal-cookie';
 export default async function handler(req, res){
     if(req.method === 'POST'){
-       const email = req.body.email;
-       const password = req.body.password;
-       const resObj = await authenticateUser(email, password);
-    //    if(resObj.data.auth){
-    //     cookieCutter.set('myToken', resObj.data.token);
-    //    }
-        res.status(200).json(resObj);
+    const {email, password} = req.body;
+    const resObj = await authenticateUser(email, password);
+       if(resObj.data.auth){
+        res.setHeader('Set-Cookie',
+            cookie.serialize('token', resObj.data.token, {
+                httpOnly: true,
+                secure: false,
+                maxAge: 60*60,
+                sameSite: 'strict',
+                path: '/'
+            })
+        );
+       }
+       res.status(200).json(resObj);
+        
     }
 
 }

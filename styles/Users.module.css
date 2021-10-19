@@ -1,15 +1,19 @@
 .body{
     display: flex;
     flex-direction: row;
-    height: 92vh;
+    height: 100vh;
     width: 100vw;
 
 }
 .main_container{
-    margin-top: 8vh;
     height: 100%;
     width: 100%;
     overflow: auto;
+}
+.title{
+    margin:auto;
+    text-align: center;
+    background-color: green;
 }
 
 .table {
@@ -38,4 +42,8 @@
 
 .userDataRow:hover{
     cursor: pointer;
+}
+
+.NavDropdown{
+    color: white
 }

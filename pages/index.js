@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SignIn from "../components/LogIn_Form/SignIn";
-const Home = () => {
+const Webpage = () => {
   return(
     
     <>
@@ -15,4 +15,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Webpage;

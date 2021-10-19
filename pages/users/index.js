@@ -2,26 +2,26 @@ import styles from '../../styles/Users.module.css';
 import {useState, useContext} from 'react';
 import User from '../../components/user/User';
 import AuthNavbar from '../../components/AuthNavbar/AuthNavbar';
-import AppContext from '../context/state';
+import Link from 'next/link';
 
 
 const displayUsers = ({users}) => {
-    const {cancelBtnStatus} = useContext(AppContext);
-    const [status, setStatus] = useState(false);
-    
-    if(cancelBtnStatus){
-        setStatus(false);
+    const [userData, setUserData] = useState(null);
+
+    const cancelBtnHandler = () => {
+        setUserData(null);
     }
-    const showProfile = () => {
-       if(status === false) setStatus(true)
+
+    const showProfile = (user) => {
+       setUserData(user);
     }
 
 
     return (
         <>
-        <AuthNavbar />
         <div className={styles.body} >
          <div className={styles.main_container}  >
+                <h2 className = {styles.title}>Users List</h2>
             <table className={styles.table}>
                 <thead>
                     <tr>
@@ -35,9 +35,10 @@ const displayUsers = ({users}) => {
                 </thead>
                <tbody>
                {
+                
                    users.map(user => {
                        return (
-                        <tr className={styles.userDataRow} onClick={showProfile}>
+                        <tr className={styles.userDataRow} onClick={() => showProfile(user)}>
                             <td key={user.id}>{user.firstName}</td>
                             <td key={user.id}>{user.lastName}</td>
                             <td key={user.id}>{user.gender}</td>
@@ -49,12 +50,12 @@ const displayUsers = ({users}) => {
                }
                </tbody>
             </table>
+          abc  <div>{userData?.firstName}</div>
          </div>
            {
-
-            status ? 
-                <User />
-               : null 
+            
+            userData && <User cancelBtnHandler = {cancelBtnHandler} userData={userData}/>
+               
            }
         </div>
      

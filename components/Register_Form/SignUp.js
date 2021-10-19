@@ -81,7 +81,8 @@ const SignUp = () => {
             <div className={styles.header}>
                 SIGN UP
             </div>    
-        <div className={styles.formFld}>
+            <form action='/'>
+            <div className={styles.formFld}>
                 <div className={styles.name}>
                     <input className={styles.input} type='text' placeholder='First Name' value={firstName} required
                         onChange={(e) => setFirstName(e.target.value)}
@@ -131,6 +132,7 @@ const SignUp = () => {
                     }
                 </div>
             </div>
+            </form>
         </div>
         
         </div>

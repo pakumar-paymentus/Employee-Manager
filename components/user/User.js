@@ -1,43 +1,45 @@
 import styles from './User.module.css';
 import { useState } from 'react';
-import AppContext from '../../pages/context/state';
-const User = () => {
-    const [cancelBtnStatus, setCancelBtnStatus] = useState('false');
-    const cancelBtnHandler = () => {
-        setCancelBtnStatus(true);
+const User = ({cancelBtnHandler, userData}) => {
+    console.log(userData);
+
+    const cancelBtnStatus = () => {
+        cancelBtnHandler();
     }
     
     return(
     <>
-      <AppContext.Provider value={{cancelBtnStatus}}>
+     
         <div className={styles.body}>           
                <div className={styles.main_container}>
                    <div className={styles.upperBody} >
                         <div className={styles.cancelBtn}>
                             <i className="fas fa-times-circle" 
-                            onClick={cancelBtnHandler}></i>
+                            onClick={cancelBtnStatus}></i>
                         </div>
                         <div className={styles.profilePic}>
                             <i className={`fas fa-user ${styles.pic}`}></i>
                         </div>
-                        <div className={styles.name}> Pawan Kumar
+                        <div className={styles.name}>{userData.firstName}
                         </div>
                     </div>
                    <div className={styles.lowerBody}>
-                    <div className={styles.otherDetails}>
-                        <div className={styles.details}>Email :</div>
-                        <div className={styles.details}>Mobile :</div>
-                        <div className={styles.details}>DOB : </div>
-                        <div className={styles.details}>Age : </div>
-                        <div className={styles.details}>Gender : </div>
+                    <div className={styles.otherDetails}> 
+                        <div className={styles.details}>Email : {userData.email}</div>
+                        <div className={styles.details}>Mobile :{userData.mobile}</div>
+                        <div className={styles.details}>DOB : {userData.dob}</div>
+                        <div className={styles.details}>Age : {userData.age}</div>
+                        <div className={styles.details}>Gender {userData.Gender}: </div>
                     </div>
                 </div>
                     
                </div>
-            </div>   
-        </AppContext.Provider>     
+            </div>     
     </>
     )
 }
 
 export default User;
+
+
+// {`${userData.firstName} ${userData.lastName}`}

@@ -20,6 +20,7 @@ const authenticateUser = async (email, password) => {
             "data": {
                 "auth": true, 
                 "token": token,
+                "userName": user.firstName,
             },
             "message": "Welcome to HomePage"
         }

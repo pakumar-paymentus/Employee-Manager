@@ -4,7 +4,7 @@ import {useState} from 'react';
 import { useRouter } from 'next/router';
 import checker from './validationChecks';
 import Navbar from '../Navbar/Navbar';
-
+import cookie from 'js-cookie';
 
 const SignIn = () => {
     const router = useRouter();
@@ -25,7 +25,7 @@ const SignIn = () => {
     
 
     //on click of SignIn button post data for authentication to api
-    const login = async(e) => {
+    const login = async(event) => {
         const userData = {
             email: email,
             password: password
@@ -56,13 +56,15 @@ const SignIn = () => {
 
     
         const res = await response.json();
+        //set cookie client side for user general information:
+        cookie.set('user',`${res.data.userName}`);
 
         //if res.data is null or undefined then it is not registerd
         if(!res.data){
             setStatus(true);
             setMsg(res.message);
         }else if(res.data.auth === true){   // if res.data.auth is true that means user authenticated
-            router.push('/home');
+            router.push('/home')
         }else{                          // if res.data.auth is false that means email or password is incorrect
             setStatus(true);    
             setMsg(res.message);
@@ -91,7 +93,7 @@ const SignIn = () => {
                     </Link>
                 </div>
                 <button className={styles.signInBtn} 
-                    onClick={(e) =>{ login(e)}}>
+                    onClick={(e) => login(e)}>
                     SIGN IN
                 </button>
                 <div className={styles.create}>
