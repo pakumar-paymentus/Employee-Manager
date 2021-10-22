@@ -1,4 +1,4 @@
-.nav{
+/* .nav{
     height: 8vh;
     width: 100%;
     display: flex;
@@ -47,22 +47,22 @@
     cursor: pointer;
 }
 
-/* .NavDropdown{
-    color: white;
-    display: block;
-    
-} */
+
 
 .dropbtn {
 
     color: white;
-    padding: 8px;
-    font-size: 16px;
+    padding: 6px;
+    font-size: 15px;
     border: none;
     transform: scale(1.4);
     margin-top: 3px;
+    border-radius: 5px;
+    
   }
-  
+  .dropIcon{
+      margin-left:4px;
+  }
   .dropdown {
     position: relative;
     display: inline-block;
@@ -88,8 +88,12 @@
   
   .dropdown:hover .dropdownContent {display: block}
   
-  .dropdown:hover .dropbtn {background-color: white; color: black;}
+  .dropdown:hover .dropbtn {background-color: white; color: black;font-size: 13px;  }
 
 .icon{
     margin-left: 2rem;
+} */
+
+.nav{
+    display: flex;
 }

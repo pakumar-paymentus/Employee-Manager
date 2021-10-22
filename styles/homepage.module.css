@@ -1,14 +1,8 @@
 .body{
-    display: flex;
-    flex-direction: row;
-    height: 92vh;
+    /* display: flex;
+    flex-direction: row; */
+    height: 100vh;
     width: 100vw;
+    overflow: hidden;
 
-}
-.main_container{
-    margin-top: 8vh;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    
 }

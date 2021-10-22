@@ -1,21 +1,23 @@
 import AuthNavbar from '../components/AuthNavbar/AuthNavbar';
 import styles from '../styles/homepage.module.css';
 import cookie from 'cookie';
+import jwt from 'jsonwebtoken';
+import { useState } from 'react';
 
 const home = ({ token, userName }) => {
+    const [showUserStatus, setShowUserStatus] = useState(false);
     return (
-
+        
         !token ? <h1>You are not authorized</h1> : <>
-            <AuthNavbar />
-            <div className={styles.body}>
-                <div className={styles.main_container}>
-                <h1>Welcome {userName}</h1>
-                </div>
-               
-            </div>
+        <div className={styles.body}>
+        <AuthNavbar setShowUserStatus = {setShowUserStatus} />
+        <div className={styles.main_content}>
+            <h1>Welcome {userName}</h1>
+        </div>
+        </div>
         </>
 
-
+        
     )
 }
 
@@ -37,10 +39,14 @@ export async function getServerSideProps({ req, res }) {
 
         return obj;
     }, {})
+        let payload; 
+        if(cookieObj.token){
+         payload = await jwt.verify(cookieObj.token, process.env.JWT_KEY);
+        }
     return {
         props: {
             token: cookieObj.token|| "",
-            userName:cookieObj.user || ""
+            userName: !payload ? "" : payload.name
 
         }
 

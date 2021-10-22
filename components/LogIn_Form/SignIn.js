@@ -4,7 +4,6 @@ import {useState} from 'react';
 import { useRouter } from 'next/router';
 import checker from './validationChecks';
 import Navbar from '../Navbar/Navbar';
-import cookie from 'js-cookie';
 
 const SignIn = () => {
     const router = useRouter();
@@ -56,9 +55,7 @@ const SignIn = () => {
 
     
         const res = await response.json();
-        //set cookie client side for user general information:
-        cookie.set('user',`${res.data.userName}`);
-
+        
         //if res.data is null or undefined then it is not registerd
         if(!res.data){
             setStatus(true);

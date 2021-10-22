@@ -1,11 +1,9 @@
 import styles from '../../styles/Users.module.css';
 import {useState, useContext} from 'react';
 import User from '../../components/user/User';
-import AuthNavbar from '../../components/AuthNavbar/AuthNavbar';
-import Link from 'next/link';
 
 
-const displayUsers = ({users}) => {
+const DisplayUsers = ({users, token}) => {
     const [userData, setUserData] = useState(null);
 
     const cancelBtnHandler = () => {
@@ -18,6 +16,7 @@ const displayUsers = ({users}) => {
 
 
     return (
+        !token ? <h1>You are not authorized</h1> :
         <>
         <div className={styles.body} >
          <div className={styles.main_container}  >
@@ -50,7 +49,7 @@ const displayUsers = ({users}) => {
                }
                </tbody>
             </table>
-          abc  <div>{userData?.firstName}</div>
+            <div>{userData?.firstName}</div>
          </div>
            {
             
@@ -64,19 +63,38 @@ const displayUsers = ({users}) => {
     );
 }
 
-export default displayUsers;
+export default DisplayUsers;
 
 
-export async function getServerSideProps(){
+export async function getServerSideProps({req,res}){
     const port = process.env.PORT;
     console.log(port);
     const response = await fetch(`http://localhost:3000/api/users`);
     const data = await response.json();
 
+    let pairs = req.headers.cookie.split(";");
+        let splittedPairs = pairs.map(cookie => cookie.split("="));
+        const cookieObj = splittedPairs.reduce(function (obj, cookie) {
+            // cookie[0] is the key of cookie
+            // cookie[1] is the value of the cookie
+            // decodeURIComponent() decodes the cookie
+            // string, to handle cookies with special
+            // characters, e.g. '$'.
+            // string.trim() trims the blank spaces
+            // auround the key and value.
+            obj[decodeURIComponent(cookie[0].trim())]
+                = decodeURIComponent(cookie[1].trim());
+    
+            return obj;
+        }, {})
+       
+     
+
     //getServerProps should return an object an object must contain props which is also a object
     return {
         props: {
-            users: data
+            users: data,
+            token: cookieObj.token || ""
         }
     }
 }
