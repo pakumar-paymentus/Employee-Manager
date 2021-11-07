@@ -22,6 +22,7 @@ const SignUp = () => {
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
     const [mobile, setMobile] = useState('');
+    const [clientName, setClientName] = useState('');
     //status value for message showing client side
     const [status, setStatus] = useState(false);
     const [msg, setMsg] = useState('');
@@ -37,7 +38,8 @@ const SignUp = () => {
             dob: dob,
             age: age,
             gender: gender,
-            mobile: mobile
+            mobile: mobile,
+            clientName: clientName
 
         }
         

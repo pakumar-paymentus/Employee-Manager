@@ -30,11 +30,6 @@ const SignIn = () => {
             password: password
         }
         const myValidator = checker(userData);
-        if(myValidator.setStatus){
-            setStatus(true);
-            setMsg(myValidator.setMsg);
-            return;
-        }
         
         //client side validation checks
         //If status true means show error msg to client

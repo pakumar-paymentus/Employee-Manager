@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SignIn from "../components/LogIn_Form/SignIn";
+import RegisterClient from '../components/RegisterClient/Client';
 const Webpage = () => {
   return(
     
@@ -10,6 +11,7 @@ const Webpage = () => {
             <SignIn />      
         </div>
       </div>
+      
     </>
     
   )

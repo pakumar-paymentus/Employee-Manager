@@ -1,18 +1,54 @@
+import React, {useState, useEffect} from 'react';
 import AuthNavbar from '../components/AuthNavbar/AuthNavbar';
 import styles from '../styles/homepage.module.css';
-import cookie from 'cookie';
 import jwt from 'jsonwebtoken';
-import { useState } from 'react';
+import { useUserContext } from './context/state';
+import User from '../components/user/User'
+import Users from '../components/Users/Users';
+import axios from 'axios';
 
 const home = ({ token, userName }) => {
-    const [showUserStatus, setShowUserStatus] = useState(false);
+    //handling welcome msg and show all users on click of users 
+    const {usersContext, welcomeContext} = useUserContext();
+    const {showUsers, setShowUsers} = usersContext;
+    const {showWelcome, setShowWelcome} = welcomeContext;
+    
+    //maintain variables for showing pagination of users 
+    const [allUsers, setAllUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currPage, setCurrPage] = useState(0);
+    
+    const usersPerPage = 10;
+    const pageVisited = currPage * usersPerPage;
+
+    useEffect(() => {
+        const fetchUsers = async() => {
+            setLoading(true);
+            const res = await axios.get('/api/users');
+            setAllUsers(res.data);
+            setLoading(false);
+        }
+        fetchUsers();
+    }, []);
+
+    const currUsers = allUsers.slice(pageVisited, pageVisited+usersPerPage);
+
+    
+
     return (
         
         !token ? <h1>You are not authorized</h1> : <>
         <div className={styles.body}>
-        <AuthNavbar setShowUserStatus = {setShowUserStatus} />
+        <AuthNavbar/>
         <div className={styles.main_content}>
-            <h1>Welcome {userName}</h1>
+           {
+            showWelcome && <h1 style={{textTransform:'capitalize'}}>Welcome {userName}</h1>
+           } 
+            {
+                showUsers && <div>
+                <Users currUsers={currUsers} loading={loading} numberOfUsers = {allUsers.length} usersPerPage={usersPerPage} setCurrPage={setCurrPage}/>
+                </div>
+            }
         </div>
         </div>
         </>

@@ -1,25 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import styles from './AuthNavbar.module.css';
 import { useRouter } from 'next/router'
+import { useUserContext } from '../../pages/context/state';
 const AuthNavbar = () => {
-      const router = useRouter();
-      const logoutHandler = async() => {
-        const response = await fetch('/api/logout.services', {
-          method: 'POST',
-          headers:{
-              'Content-Type': 'application/json'
-          }
+  const {usersContext, welcomeContext} = useUserContext();
+
+  const {showUsers, setShowUsers} = usersContext;
+  const {showWelcome, setShowWelcome} = welcomeContext;
+  
+  const router = useRouter();
+  const logoutHandler = async() => {
+  const response = await fetch('/api/logout.services', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        }
       })
+    setShowWelcome(true);
+    setShowUsers(false);
 
-        const res = await response.json();
-        router.push('/');
-    }
+    const res = await response.json();
+    router.push('/');
+  }
     
-    const showUsersList = () => {
-
-      
-      
-    }
+  const showUsersList = () => {
+    console.log('clicked on users list');
+    setShowUsers(true);
+    setShowWelcome(false);
+  }
        
     return(
         <>

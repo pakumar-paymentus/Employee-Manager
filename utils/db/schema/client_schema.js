@@ -1,15 +1,16 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
 
-const registerSchema = new mongoose.Schema({
-    firstName: {
+const clientSchema = new mongoose.Schema({
+    clientId: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String
+    clientName: {
+        type: String,
+        required: true
     },
-    email: {
+    clientEmail: {
         type: String,
         required: true,
         unique: [true, "Email already exist",],
@@ -19,17 +20,9 @@ const registerSchema = new mongoose.Schema({
             }
         }
     },
-    password:{
-        type: String,
-        required: true
-    },
-    age: Number,
-    gender: String,
-    mobile: Number,
-    dob: Date    
 })
 
 // if alreay require this will show error you do not override model
 //for avoid that error if model is already connected return that model
     
-export default mongoose.models.Employee || mongoose.model("Employee", registerSchema); 
+export default mongoose.models.Clients || mongoose.model("Clients", clientSchema); 
